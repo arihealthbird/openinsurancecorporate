@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Default to a soft, gallery-like canvas */
+  --page-bg: #f6f0e8;
+  --page-text: #201814;
+
+  /* Glassmorphism tokens used across nav + cards */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(140, 112, 88, 0.22);
+
+  /* Default canvas tokens (used before a theme is resolved) */
+  --canvas-bg: #f5eee5;
+}
+
+/* Keep the world in a cream palette across phases, with only subtle shifts */
+html[data-theme='dawn'] {
+  color-scheme: light;
+  --page-bg: #f9f3ea;
+  --page-text: #201814;
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(168, 138, 110, 0.25);
+
+  --canvas-bg: #f7efe5;
+}
+
+html[data-theme='day'] {
+  color-scheme: light;
+  --page-bg: #f5ecdf;
+  --page-text: #221814;
+  --glass-bg: rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(164, 132, 102, 0.26);
+
+  --canvas-bg: #f6efe3;
+}
+
+html[data-theme='dusk'] {
+  color-scheme: light;
+  --page-bg: #f1e3d6;
+  --page-text: #241712;
+  --glass-bg: rgba(252, 244, 236, 0.9);
+  --glass-border: rgba(150, 116, 90, 0.28);
+
+  --canvas-bg: #f2e5d8;
+}
+
+html[data-theme='night'] {
+  /* Keep a warm cream world even at "night" */
+  color-scheme: light;
+  --page-bg: #e9ddcf;
+  --page-text: #241712;
+  --glass-bg: rgba(248, 241, 234, 0.9);
+  --glass-border: rgba(142, 110, 88, 0.3);
+
+  --canvas-bg: #eddece;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: var(--canvas-bg);
+  background-image:
+    /* single gentle cream gradient (no bands) */
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.5),
+      rgba(247, 235, 220, 0.94)
+    ),
+    /* soft diagonal weave */
+    repeating-linear-gradient(
+      45deg,
+      rgba(80, 64, 48, 0.042) 0px,
+      rgba(80, 64, 48, 0.042) 0.8px,
+      transparent 0.8px,
+      transparent 16px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(80, 64, 48, 0.036) 0px,
+      rgba(80, 64, 48, 0.036) 0.8px,
+      transparent 0.8px,
+      transparent 19px
+    ),
+    /* subtle paper grain – repeated mottled dots */
+    radial-gradient(
+      circle,
+      rgba(80, 64, 48, 0.07) 0px,
+      rgba(80, 64, 48, 0.07) 0.7px,
+      transparent 0.7px
+    ),
+    radial-gradient(
+      circle,
+      rgba(80, 64, 48, 0.05) 0px,
+      rgba(80, 64, 48, 0.05) 0.7px,
+      transparent 0.7px
+    );
+  background-size:
+    100% 100%,   /* gradient */
+    420px 420px, /* weave 1 */
+    520px 520px, /* weave 2 */
+    36px 36px,   /* dots 1 */
+    58px 58px;   /* dots 2 */
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat;
+  background-blend-mode:
+    soft-light,
+    multiply,
+    multiply,
+    soft-light,
+    soft-light;
+  color: var(--page-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reusable glass surface for nav + cards */
+.glass-surface {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+}
+
+/* Layout hook for the content canvas; global canvas texture lives on body */
+.canvas-surface {
+  background-color: transparent;
+}
